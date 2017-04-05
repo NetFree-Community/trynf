@@ -11,18 +11,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+//using System.Net.Http;
+using System.Net;
+using System.IO;
 
 namespace wTryNetFree
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
         }
+
         // אירוע הכפתור התחברות
         private void btnTry_Click(object sender, RoutedEventArgs e)
         {
@@ -39,6 +45,12 @@ namespace wTryNetFree
                 this.txtErr.Text = "נראה שמזהה החיבור שגוי. מזהה החיבור צריך להיות עם : (נקודותיים)";
                 return;
             }
+            //בודק חוקיות מזהה
+            if (!IsValidId(this.txtid.Text))
+            {
+                this.txtErr.Text = "מזהה חיבור לא תקני או שפג תוקפו";
+                return;
+            }
             // עכשיו, אחרי שכל הבדיקות עברו תקין, אני ממשיך הלאה
             // מצהיר על מערך
             // ומפצל את המזהה לשם משתמש וסיסמא
@@ -52,29 +64,30 @@ namespace wTryNetFree
             System.IO.File.WriteAllText(Environment.CurrentDirectory + "\\config.json", sjson);
 
             // מריץ את הקובץ
-
-            Process p = new Process();
-                p.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
-                p.StartInfo.Arguments = "nfaw-io\\src\\server -c config.json";
-                p.StartInfo.FileName = "nfaw-io\\src\\node.exe";
-                p.StartInfo.UseShellExecute = true;
+            Process server = new Process();
+                server.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
+                server.StartInfo.Arguments = "nfaw-io\\src\\server -c config.json";
+                server.StartInfo.FileName = "nfaw-io\\src\\node.exe";
+            server.StartInfo.UseShellExecute = true;
             // מגדיר אותו לרוץ מוסתר
-            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                p.Start();
+            server.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            server.Start();
 
             // מסתיר את המסך
             this.Hide();
-            //ממתין שהפיירפוקס ייצא
-            p.WaitForExit();
+            //בודק אם הפרטים נכונים
+
+            //ממתין שהשרת ייצא
+            server.WaitForExit();
             //אחרי שהוא יצא, יוצא גם מהתוכנית
             this.Close();
             
         }
+
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             // סגור את התוכנית
             this.Close();
-
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -89,5 +102,38 @@ namespace wTryNetFree
                 DragMove();
             }
         }
+        private Boolean IsValidId(string id)
+        {
+            string apiAddress = "http://home-page.cf:5938/api/test-key/check/";
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiAddress + id);
+            request.Method = "GET";
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                Stream receiveStream = response.GetResponseStream();
+                StreamReader readStream = null;
+
+                if (response.CharacterSet == null)
+                {
+                    readStream = new StreamReader(receiveStream);
+                }
+                else
+                {
+                    readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
+                }
+
+                string data = readStream.ReadToEnd();
+                response.Close();
+                readStream.Close();
+                bool isValid = data == "true";
+                return isValid;
+            }
+
+            return true;
+        }
     }
+
 }
