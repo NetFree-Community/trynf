@@ -1,0 +1,8 @@
+{
+	"url": "http://185.37.150.104:5938/netfree",
+	"username": "test24854238",
+	"password": "f9550bf451776c1acfa4c6d1d0b94ae5",
+	"listen": 1080,
+	"firefox": "..\\..\\ff_win32\\firefox.exe",
+	"firefoxprofile": "..\\..\\ff_profile"
+}
