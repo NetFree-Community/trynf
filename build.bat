@@ -17,9 +17,12 @@ copy ff_profile\prefs.js dist\ff_profile\
 
 copy wTryNetFree\wTryNetFree\bin\Debug\wTryNetFree.exe dist\
 
-del dist.7z
+rem del dist.7z
+rem 7-Zip\7z.exe a -t7z dist.7z .\dist\*
+rem copy /b 7zS.sfx + 7z_sfx.conf + dist.7z trynf.exe
 
-7-Zip\7z.exe a -t7z dist.7z .\dist\*
 
-copy /b 7zS.sfx + config.sfx + dist.7z trynf.exe
+rem WinRAR\rar.exe a -r -sfx -z"rar_sfx.conf" dist trynf.exe
 
+del trynf.exe
+makesfx.exe  dist trynf.exe  -mf -ft -we -di -un -op dist\wTryNetFree.exe
