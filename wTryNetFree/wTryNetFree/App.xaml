@@ -1,0 +1,11 @@
+﻿<Application x:Class="wTryNetFree.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:wTryNetFree"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <FontFamily x:Key="Assistant ExtraLight">./Fonts/Assistant ExtraLight.ttf#Assistant</FontFamily>
+        <FontFamily x:Key="Assistant Light">./Fonts/Assistant Light.ttf#Assistant</FontFamily>
+        <FontFamily x:Key="Assistant Regular">./Fonts/Assistant.ttf#Assistant</FontFamily>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,16 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="wTryNetFree.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="sjson" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">{
+	"url": "http://185.37.150.104:{{port}}/netfree",
+	"username": "{{user}}",
+	"password": "{{pass}}",
+	"listen": 1080,
+	"firefox": "..\\..\\ff_win32\\firefox.exe",
+	"firefoxprofile": "..\\..\\ff_profile"
+}</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
