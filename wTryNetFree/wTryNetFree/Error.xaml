@@ -1,0 +1,20 @@
+﻿<Window x:Class="wTryNetFree.Error"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wTryNetFree"
+        ResizeMode="NoResize"
+        mc:Ignorable="d"  Title="Thank" Height="333" Width="502" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Window.Background>
+        <ImageBrush>
+            <ImageBrush.ImageSource>
+                <BitmapImage UriSource="Images\NFError.png"/>
+            </ImageBrush.ImageSource>
+        </ImageBrush>
+    </Window.Background>
+    <Grid>
+        <Button BorderBrush="Transparent" Background="Transparent" Click="CloseApp" Margin="480,8,8,311"></Button>
+        <Button BorderBrush="Transparent" Background="Transparent" Click="CloseApp" Margin="196,244,196,54"></Button>
+    </Grid>
+</Window>

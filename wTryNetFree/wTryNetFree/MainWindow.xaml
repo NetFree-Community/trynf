@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wTryNetFree"
         ResizeMode="NoResize" MouseDown="Window_MouseDown"
+        KeyDown="Window_KeyDown"
         mc:Ignorable="d" FlowDirection="RightToLeft" Title="נסה את נטפרי" Height="455" Width="500" Icon="Images\nftest_hqY_icon.ico" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="#F8F8F8">
 
     <Window.Resources>
@@ -15,7 +16,7 @@
         </ControlTemplate>
     </Window.Resources>
 
-    <Grid>
+    <Grid FocusManager.FocusedElement="{Binding ElementName=txtid}">
         <StackPanel>
             <Label Height="132" Background="#314A52">
                 <StackPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" Height="120" Margin="-7,-5,0,0">
