@@ -16,7 +16,7 @@ namespace wTryNetFree
         internal static string Send(string urlParameters, string method, string body = "")
         {
             //string apiAddress = "http://localhost:8080/api/";
-            string apiAddress = "http://video-tov.ml:5938/api/";
+            string apiAddress = "http://items.cf:5938/api/";
             try
             {
 
