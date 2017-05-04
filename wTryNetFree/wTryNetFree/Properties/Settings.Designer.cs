@@ -12,7 +12,7 @@ namespace wTryNetFree.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,9 +25,13 @@ namespace wTryNetFree.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("{\r\n\t\"url\": \"http://185.37.150.104:{{port}}/netfree\",\r\n\t\"username\": \"{{user}}\",\r\n\t" +
-            "\"password\": \"{{pass}}\",\r\n\t\"listen\": 1080,\r\n\t\"firefox\": \"..\\\\..\\\\ff_win32\\\\firefo" +
-            "x.exe\",\r\n\t\"firefoxprofile\": \"..\\\\..\\\\ff_profile\"\r\n}")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"
+                  {
+                  ""url"": ""http://185.37.150.104:5938/netfree"",
+                  ""listen"": 1080,
+                  ""firefox"": ""..\\..\\ff_win32\\firefox.exe"",
+                  ""firefoxprofile"": ""..\\..\\ff_profile""
+                  }")]
         public string sjson {
             get {
                 return ((string)(this["sjson"]));

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,83 +10,83 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net;
+using System.IO;
+using System.ComponentModel;
+using System.Dynamic;
+using Newtonsoft.Json;
 
 namespace wTryNetFree
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : CustomWindow
     {
         public MainWindow()
         {
             InitializeComponent();
         }
+        private void ConnectionProblem(object sender, RoutedEventArgs e)
+        {
+            ConnectionProblem connectionProblem = new ConnectionProblem();
+            connectionProblem.ShowDialog();
+        }
         // אירוע הכפתור התחברות
         private void btnTry_Click(object sender, RoutedEventArgs e)
         {
             //בודק אם המזהה חיבור ריק
-            if (this.txtid.Text.Length == 0) {
-                this.txtErr.Text = "אין מזהה חיבור";
-                // אם שגוי, יוצא מהפונקצייה
+            if (txtid.Text.Length == 0)
+            {
+                txtErr.Text = "אין מזהה חיבור";
                 return;
             }
 
             //בודק אם מזהה החיבור לא מכיל נקודותיים
-            if (!this.txtid.Text.Contains(":"))
+            if (!txtid.Text.Contains(":"))
             {
-                this.txtErr.Text = "נראה שמזהה החיבור שגוי. מזהה החיבור צריך להיות עם : (נקודותיים)";
+                txtErr.Text = "נראה שמזהה החיבור שגוי. מזהה החיבור צריך להיות עם : (נקודותיים)";
                 return;
             }
-            // עכשיו, אחרי שכל הבדיקות עברו תקין, אני ממשיך הלאה
-            // מצהיר על מערך
-            // ומפצל את המזהה לשם משתמש וסיסמא
-                string[] userpass = this.txtid.Text.Split(':');
-            // מצהיר על המשתנה
-            // שים לב שאני לוקח את התוכן של ההגדרות מהגדרות התוכנית
+            //בודק חוקיות מזהה
+            string[] userpass = this.txtid.Text.Split(':');
 
-                string sjson = Properties.Settings.Default.sjson.Replace("{{port}}", "5938").Replace("{{pass}}", userpass[1]).Replace("{{user}}",userpass[0]);
+            App.config.username = userpass[0];
+            App.config.password = userpass[1];
 
-            // כותב את התוכן לקובץ
-            System.IO.File.WriteAllText(Environment.CurrentDirectory + "\\config.json", sjson);
-
-            // מריץ את הקובץ
-
-            Process p = new Process();
-                p.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
-                p.StartInfo.Arguments = "nfaw-io\\src\\server -c config.json";
-                p.StartInfo.FileName = "nfaw-io\\src\\node.exe";
-                p.StartInfo.UseShellExecute = true;
-            // מגדיר אותו לרוץ מוסתר
-            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                p.Start();
-
-            // מסתיר את המסך
-            this.Hide();
-            //ממתין שהפיירפוקס ייצא
-            p.WaitForExit();
-            //אחרי שהוא יצא, יוצא גם מהתוכנית
-            this.Close();
-            
-        }
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            // סגור את התוכנית
-            this.Close();
-
-        }
-
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            // אם נלחץ הכפתור השמאלי של העכבר
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (Validation.ExpiredID((string)App.config.username))
             {
-                // גרור את החלון
-                // יש צורך בזה מכיון שהחלון הוא ללא מסגרת 
-                // כפי שמוגדר בזאמל
-                // WindowStyle="None
-                DragMove();
+                CustomWindow expired;
+
+                if (App.config.feedbackSent == true && App.config.userReg == true) expired = new ExpiredAndUserFillReg();
+                else if (App.config.feedbackSent == true && App.config.userReg == false) expired = new ExpiredAndUserNoFillReg(); 
+                else expired = new ExpiredAndUserNoSendFeedback();
+                
+                expired.Show();
+                Hide();
+                return;
             }
+            if (Validation.BadId(txtid.Text))
+            {
+                txtErr.Text = "מזהה חיבור לא תקני";
+                return;
+            }
+            App.WriteConfig();
+            Hide();
+            Server.Run();
+        }
+
+        //לוכד לחיצה על אנטר
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                btnTry_Click(sender, e);
+            }
+
         }
     }
+
+
 }

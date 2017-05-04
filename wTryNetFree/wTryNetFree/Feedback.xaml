@@ -1,0 +1,48 @@
+﻿<local:CustomWindow x:Class="wTryNetFree.Feedback"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wTryNetFree"
+        ResizeMode="NoResize" 
+        MouseDown="Window_MouseDown"
+        Icon="Images\nftest_hqY_icon.ico" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        mc:Ignorable="d" Title="נסה את נטפרי" Height="586" Width="500">
+    <Window.Background>
+        <ImageBrush>
+            <ImageBrush.ImageSource>
+                <BitmapImage UriSource="Images\NFfeedback.png"/>
+            </ImageBrush.ImageSource>
+        </ImageBrush>
+    </Window.Background>
+    <Window.Resources>
+ 
+    </Window.Resources>
+
+    <Grid>
+        <Button BorderBrush="Transparent" Background="Transparent" Click="CloseApp" Margin="478,7,7,564"></Button>
+
+        <ListBox Padding="-3" x:Name="easyConnection" SelectedValuePath="Tag" Style="{StaticResource listChecks}" Margin="135.167,138,205.125,0" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <ListBoxItem Tag="קשה" Style="{StaticResource asCheckBox}" Margin="0 0 49 0" />
+            <ListBoxItem Tag="סביר" Style="{StaticResource asCheckBox}" Margin="0 0 61 0" />
+            <ListBoxItem Tag="קל מאד" Style="{StaticResource asCheckBox}"/>
+        </ListBox>
+        <TextBox FlowDirection="RightToLeft" Name="easyConnection_note" TextWrapping="Wrap" AcceptsReturn="True" Margin="67,166,104,361.5"/>
+        <ListBox Padding="-3" x:Name="satisfaction" SelectedValuePath="Tag" Style="{StaticResource listChecks}" Margin="135.167,262,207.625,0" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <ListBoxItem Tag="סינון בעייתי" Style="{StaticResource asCheckBox}" Margin="0 0 49 0" />
+            <ListBoxItem Tag="סינון סביר" Style="{StaticResource asCheckBox}" Margin="0 0 61 0" />
+            <ListBoxItem Tag="סינון מעולה!" Style="{StaticResource asCheckBox}"/>
+        </ListBox>
+        <TextBox FlowDirection="RightToLeft" Name="Satisfaction_note" TextWrapping="Wrap" AcceptsReturn="True" Margin="67,302,104,226"/>
+        <ListBox Padding="-3" x:Name="currentFilter" SelectedValuePath="Tag" Style="{StaticResource listChecks}" Margin="113,0,191,168.902" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Height="13.098" VerticalAlignment="Bottom">
+            <ListBoxItem Tag="נטספרק" Style="{StaticResource asCheckBox}" Margin="0 0 42 0" />
+            <ListBoxItem Tag="נתיב" Style="{StaticResource asCheckBox}" Margin="0 0 49 0" />
+            <ListBoxItem Tag="אתרוג" Style="{StaticResource asCheckBox}" Margin="0 0 43 0"/>
+            <ListBoxItem Tag="רימון" Style="{StaticResource asCheckBox}"/>
+        </ListBox>
+        <TextBox Name="name" Margin="61,451,321,117"/>
+        <TextBox Name="telephone" Margin="61,474,321,93"/>
+        <Button Click="Submit" Background="Transparent" Margin="194,527,196,21"/>
+
+    </Grid>
+</local:CustomWindow>

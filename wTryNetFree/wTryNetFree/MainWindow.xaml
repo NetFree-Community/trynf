@@ -1,51 +1,29 @@
-﻿<Window x:Class="wTryNetFree.MainWindow"
+﻿<local:CustomWindow x:Class="wTryNetFree.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wTryNetFree"
         ResizeMode="NoResize" MouseDown="Window_MouseDown"
-        mc:Ignorable="d" FlowDirection="RightToLeft" Title="נסה את נטפרי" Height="455" Width="500" Icon="Images\nftest_hqY_icon.ico" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="#F8F8F8">
+        KeyDown="Window_KeyDown"
+        Icon="Images\nftest_hqY_icon.ico" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        mc:Ignorable="d" Title="נסה את נטפרי" Height="578" Width="502">
+    <Window.Background>
+        <ImageBrush>
+            <ImageBrush.ImageSource>
+                <BitmapImage UriSource="Images\MainWindow.png"/>
+            </ImageBrush.ImageSource>
+        </ImageBrush>
+    </Window.Background>
 
-    <Window.Resources>
-        <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
-            <Border SnapsToDevicePixels="True" CornerRadius="0" Background="blue">
-                <ContentPresenter RecognizesAccessKey="True"></ContentPresenter>
-            </Border>
-        </ControlTemplate>
-    </Window.Resources>
+    <Grid FocusManager.FocusedElement="{Binding ElementName=txtid}">
+        <Button BorderBrush="Transparent" Click="CloseApp" Background="Transparent" Margin="480,8,8,557"></Button>
 
-    <Grid>
-        <StackPanel>
-            <Label Height="132" Background="#314A52">
-                <StackPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" Height="120" Margin="-7,-5,0,0">
-                    <StackPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" Height="127" Width="78">
-                        <Button x:Name="btnClose" Click="btnClose_Click" Width="20" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Margin="10,5,5,-5">
-                            <TextBlock FontSize="20" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Right">X</TextBlock>
-                        </Button>
-                        <Image Margin="-14,27,15,37" Source="Images\NFtest.png" Width="58" />
-                    </StackPanel>
-                    <StackPanel Height="127" Margin="0,-5,0,0">
-                        <TextBlock FontFamily="{StaticResource Assistant Light}"  Margin="5,20,0,0" FontSize="35pt" Foreground="#e3e1e2">פשוט לנסות את נטפרי!</TextBlock>
-                        <TextBlock FontFamily="{StaticResource Assistant Regular}" Margin="8,-7,0,0" FontSize="10.5pt" Foreground="#e3e1e2"> תוכנה לחיבור זמני למערכת נטפרי לצורך התנסות.</TextBlock>
-                    </StackPanel>
-                </StackPanel>
-            </Label>
+        <TextBox FlowDirection="RightToLeft" Name="txtid" BorderBrush="Transparent" Margin="83.667,166,81.333,391"/>
+        <TextBlock  Height="22" FontSize="11" Foreground="Red" FlowDirection="RightToLeft" Name="txtErr" Background="Transparent" Margin="83.667,197.5,81.333,357"/>
 
-            <Label Height="296" Width="414" Margin="0,-15,0,0" Background="#e8e7e5">
-                <StackPanel  Height="296" Width="414">
-                    <Separator Width="10" Height="70" Background="Transparent"/>
-                    <TextBlock FontFamily="{StaticResource Assistant ExtraLight}" Margin="30,0,30,0" FontSize="10.5pt" Foreground="#2B2A29">הזן כאן את מספר המזהה:</TextBlock>
-                    <Separator Width="10" Height="5" Background="Transparent"/>
-                    <TextBox Height="22" Margin="30,0,30,0" x:Name="txtid"/>
-                    <Separator Width="10" Height="10" Background="Transparent"/>
-                    <TextBlock Height="22" Margin="30,0,30,0" Foreground="Red" x:Name="txtErr"/>
-                    <Separator Width="10" Height="0" Background="Transparent"/>
-                    <Button x:Name="btnTry" Click="btnTry_Click" Background="#769897" Width="136" Height="46" Margin="20">
-                        <TextBlock Height="30" FontSize="20" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center">התחבר</TextBlock>
-                    </Button>
-                </StackPanel>
-            </Label>
-        </StackPanel>
+        <Button BorderBrush="Transparent" Click="ConnectionProblem" Cursor="Hand" Background="Transparent" Height="14" VerticalAlignment="Bottom" Margin="206,0,248.5,135"></Button>
+        <Button BorderBrush="Transparent" Click="btnTry_Click" Background="Transparent" Margin="183,463.25,183.5,70" d:LayoutOverrides="HorizontalAlignment"></Button>
+
     </Grid>
-</Window>
+</local:CustomWindow>

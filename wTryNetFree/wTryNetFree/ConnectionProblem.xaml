@@ -1,0 +1,24 @@
+﻿<local:CustomWindow x:Class="wTryNetFree.ConnectionProblem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wTryNetFree"
+        ResizeMode="NoResize" MouseDown="Window_MouseDown"
+        Icon="Images\nftest_hqY_icon.ico" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        mc:Ignorable="d"  Title="Thank" Height="408" Width="502">
+    <Window.Background>
+        <ImageBrush>
+            <ImageBrush.ImageSource>
+                <BitmapImage UriSource="Images\ConnectionProblem.png"/>
+            </ImageBrush.ImageSource>
+        </ImageBrush>
+    </Window.Background>
+    <Grid>
+        <Button BorderBrush="Transparent" Background="Transparent" Click="CloseApp" Margin="479.875,7,7.75,386"></Button>
+        <TextBox FlowDirection="RightToLeft" x:Name="Problem" TextWrapping="Wrap" AcceptsReturn="True" Margin="72.334,148.667,71.333,166.667" d:LayoutOverrides="VerticalAlignment"/>
+        <TextBox FlowDirection="RightToLeft" x:Name="name" Margin="193.001,308.667,93.583,81.667"/>
+        <TextBox x:Name="Email" Margin="193.001,0,132.833,56.334" Height="18.166" VerticalAlignment="Bottom"/>
+        <Button Click="Submit" Margin="72.334,0,0,57.709" HorizontalAlignment="Left" Width="96.166" Height="41.624" VerticalAlignment="Bottom"></Button>
+    </Grid>
+</local:CustomWindow>

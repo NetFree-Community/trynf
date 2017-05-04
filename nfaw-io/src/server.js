@@ -75,6 +75,8 @@ clientProxy.on('connect', function(){
 	
 	if(config.firefox && config.firefoxprofile){
 		var p = child_process.spawn(path.normalize(path.join(__dirname,config.firefox)),["-no-remote","-profile",path.normalize(path.join(__dirname,config.firefoxprofile))]);
+        // מוודא שהדפדפן לא יפתח שוב במקרה של ניתוק וחיבור מחדש
+        config.firefox = null;
 		p.on('exit',function(){
 			process.exit();
 		});
